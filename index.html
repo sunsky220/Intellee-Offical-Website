@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IntelLee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+Thai:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* IntelLee CI in a Swiss/modernist grid: white paper, black rules, one light blue, yellow only for Donate. */
+  --paper:#ffffff;
+  --ink:#111111;
+  --blue:#7ebed7;
+  --blue-soft:#e6f3f8;
+  --grey:#5b6670;
+  --sun:#ffc94d;
+  --rule:2px solid var(--ink);
+  --font:"Inter","Noto Sans Thai",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:500 17px/1.65 var(--font);-webkit-font-smoothing:antialiased}
+::selection{background:var(--ink);color:#fff}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:900;letter-spacing:-.03em;text-wrap:balance}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.px{padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px)}
+.up{text-transform:uppercase}
+
+/* nav */
+header{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:var(--rule)}
+.nav{display:flex;align-items:center;gap:24px;min-height:76px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.brand .sq{width:44px;height:44px;background:var(--blue);border:var(--rule);display:grid;place-items:center}
+.brand .sq svg{width:32px;height:27px;color:var(--ink)}
+.brand b{font-weight:900;font-size:24px;letter-spacing:-.02em;text-transform:uppercase}
+.menu{display:flex;align-items:center;gap:4px;margin-left:auto;list-style:none;padding:0;margin-top:0;margin-bottom:0}
+.menu a{display:block;padding:6px 10px;text-decoration:none;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.menu a:hover{background:var(--ink);color:#fff}
+.menu a[aria-current]{background:var(--blue)}
+.donate{flex:none;border:var(--rule);background:var(--sun);color:var(--ink);font:900 13px/1 var(--font);letter-spacing:.12em;text-transform:uppercase;padding:13px 16px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.donate:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.donate:active{transform:translate(4px,4px);box-shadow:none}
+@media (max-width:1080px){
+  .nav{flex-wrap:wrap;padding-top:12px;padding-bottom:0;gap:12px}
+  .donate{margin-left:auto}
+  .menu{order:3;width:calc(100% + 2*clamp(20px,4vw,48px));margin:0 calc(-1*clamp(20px,4vw,48px));padding:0 clamp(12px,4vw,40px);border-top:var(--rule);overflow-x:auto;min-height:48px}
+}
+
+/* page header (each tab) */
+.phead{display:grid;grid-template-columns:2fr 1fr;border-bottom:var(--rule)}
+.phead .txt{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(36px,5vw,64px);border-right:var(--rule)}
+.phead .idx{font-weight:800;font-size:15px;letter-spacing:.14em}
+.phead h1{font-size:clamp(52px,9vw,128px);line-height:.86;text-transform:uppercase;margin:18px 0 22px}
+.phead p{margin:0;max-width:56ch;font-size:19px;color:var(--grey)}
+.panel{position:relative;background:var(--blue);display:grid;place-items:center;padding:40px;overflow:hidden;min-height:260px}
+.panel::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--ink) 1px,transparent 1.2px);background-size:20px 20px;opacity:.22}
+.panel svg{position:relative;width:min(240px,70%);height:auto;color:var(--ink)}
+@media (max-width:820px){.phead{grid-template-columns:1fr}.phead .txt{border-right:0;border-bottom:var(--rule)}.panel{min-height:200px}}
+
+/* home hero */
+.hero{display:grid;grid-template-columns:2fr 1fr;border-bottom:var(--rule)}
+.hero .txt{padding-top:clamp(48px,7vw,96px);padding-bottom:clamp(40px,6vw,80px);border-right:var(--rule)}
+.hero h1{font-size:clamp(64px,12.5vw,176px);line-height:.84;text-transform:uppercase;letter-spacing:-.055em}
+.hero h1 span{color:var(--blue)}
+.hero .sub{margin:36px 0 0;font-weight:800;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.01em;text-transform:uppercase}
+.hero .th{margin:10px 0 0;font-size:19px;color:var(--grey);max-width:52ch}
+.hero .panel{display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;gap:28px;padding:clamp(24px,3vw,48px)}
+.hero .panel svg{align-self:center;margin:auto}
+.cta{position:relative;display:block;text-align:center;text-decoration:none;background:var(--paper);border:var(--rule);font-weight:900;font-size:clamp(16px,1.6vw,20px);letter-spacing:.14em;text-transform:uppercase;padding:22px 16px;transition:background .15s,color .15s}
+.cta:hover{background:var(--ink);color:#fff}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.hero .txt{border-right:0;border-bottom:var(--rule)}.hero .panel{min-height:320px}}
+
+/* sections */
+.sec{padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px)}
+.sec + .sec{border-top:var(--rule)}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:4px solid var(--ink);padding-bottom:14px;margin-bottom:48px}
+.shead h2{font-size:clamp(36px,6vw,80px);line-height:.95;text-transform:uppercase}
+.shead span{font-weight:800;font-size:18px;white-space:nowrap}
+
+/* swiss grid */
+.sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0 2px 2px 0}
+.sgrid > *{border:var(--rule);margin:0 -2px -2px 0}
+@media (max-width:1000px){.sgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.sgrid{grid-template-columns:1fr}}
+.cell{position:relative;display:flex;flex-direction:column;gap:18px;padding:28px;min-height:400px;background:var(--paper);transition:background .25s,color .25s}
+.cell:hover{background:var(--blue)}
+.cell.dark{background:var(--ink);color:#fff}
+.cell.dark:hover{background:var(--blue);color:var(--ink)}
+.cell .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.label{display:inline-block;background:var(--ink);color:#fff;font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px}
+.cell.dark .label{background:#fff;color:var(--ink)}
+.cell.dark:hover .label{background:var(--ink);color:#fff}
+.price{font-family:"Noto Sans Thai",var(--font);font-weight:900;font-size:15px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.glyph{flex:1;display:grid;place-items:center;min-height:120px}
+.glyph svg{width:110px;height:110px}
+.cell h3{font-size:clamp(28px,2.8vw,40px);line-height:1;text-transform:uppercase}
+.cell .en{margin:6px 0 0;font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.cell .desc{margin:0;font-size:15.5px;opacity:.85}
+.meta{display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0;list-style:none;font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.meta li+li::before{content:"/";margin:0 8px;opacity:.5}
+.act{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:var(--rule);padding-top:14px;margin-top:auto;border-color:currentColor}
+.act a,.act button{background:none;border:0;color:inherit;font:900 14px/1 var(--font);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:6px 0;text-decoration:none}
+.act a::after,.act button::after{content:" →"}
+.act a:hover,.act button:hover{text-decoration:underline;text-underline-offset:4px}
+.empty{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding:44px 28px;min-height:220px;background:repeating-linear-gradient(-45deg,var(--paper) 0 14px,var(--blue-soft) 14px 16px)}
+.empty b{display:block;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1;text-transform:uppercase;letter-spacing:-.03em}
+.empty span{font-size:18px;color:var(--grey)}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,8vw,120px)}
+.about .big{font-size:clamp(28px,3.4vw,44px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin:0 0 28px}
+.about .bar{height:10px;background:var(--blue)}
+.about .body p{margin:0 0 20px;font-size:18px}
+.quad{display:grid;grid-template-columns:1fr 1fr;padding:0 2px 2px 0}
+.quad > div{aspect-ratio:1;border:var(--rule);margin:0 -2px -2px 0;padding:clamp(16px,2.2vw,28px);display:flex;flex-direction:column;gap:8px;transition:background .25s,color .25s}
+.quad > div:hover{background:var(--blue);color:var(--ink)}
+.quad .dk{background:var(--ink);color:#fff}
+.quad svg{width:48px;height:48px;margin-top:auto}
+.quad .n{font-weight:800;font-size:13px;letter-spacing:.14em}
+.quad h3{font-size:clamp(24px,2.6vw,36px);line-height:1;text-transform:uppercase}
+.quad p{margin:0;font-size:14.5px;line-height:1.5;opacity:.85}
+@media (max-width:420px){.quad > div{aspect-ratio:auto;min-height:200px}}
+.about strong{font-weight:900;text-transform:uppercase}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+.pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 1.2fr;border-top:var(--rule);border-left:var(--rule)}
+.pillars > *{border-right:var(--rule);border-bottom:var(--rule);padding:28px;min-height:280px;display:flex;flex-direction:column;gap:14px}
+.pillars svg{width:64px;height:64px}
+.pillars .n{font-weight:800;font-size:13px;letter-spacing:.14em}
+.pillars h3{font-size:32px;text-transform:uppercase;line-height:1}
+.pillars p{margin:0;font-size:15.5px;color:var(--grey)}
+.pillars .eq{background:var(--ink);color:#fff;justify-content:space-between}
+.pillars .eq svg{width:110px;height:92px;color:var(--blue)}
+.pillars .eq b{font-size:34px;font-weight:900;text-transform:uppercase;letter-spacing:-.03em}
+@media (max-width:1100px){.pillars{grid-template-columns:repeat(2,minmax(0,1fr))}.pillars .eq{grid-column:1/-1;min-height:200px}}
+@media (max-width:520px){.pillars{grid-template-columns:1fr}}
+.swatches{display:grid;grid-template-columns:1fr 1fr;border:var(--rule);margin-top:48px}
+.swatches div{padding:28px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end}
+.swatches div:first-child{background:var(--blue);border-right:var(--rule)}
+.swatches b{font-size:22px;font-weight:900;text-transform:uppercase}
+.swatches span{font-size:15px}
+
+/* footer */
+footer{background:var(--ink);color:#fff}
+.foot{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;padding-top:64px;padding-bottom:48px;border-bottom:2px solid #2a2a2a}
+.foot h3{font-size:clamp(48px,7vw,96px);line-height:.9;text-transform:uppercase}
+.foot p{margin:12px 0 0;color:var(--blue);font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:flex-end}
+.foot nav a{text-decoration:none;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.foot nav a:hover{color:var(--blue)}
+.copy{padding-top:22px;padding-bottom:28px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+@media (max-width:700px){.foot{grid-template-columns:1fr}.foot nav{justify-content:flex-start}}
+
+/* dialog + toast */
+.overlay{position:fixed;inset:0;background:rgba(17,17,17,.55);display:none;place-items:center;padding:20px;z-index:50}
+.overlay.open{display:grid}
+.modal{background:var(--paper);border:var(--rule);box-shadow:8px 8px 0 var(--ink);padding:28px;width:min(460px,100%)}
+.modal h3{font-size:30px;text-transform:uppercase;line-height:1;margin-bottom:10px}
+.modal p{margin:0 0 18px;color:var(--grey);font-size:15.5px}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-size:12.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.field input{font:16px var(--font);padding:12px 14px;border:var(--rule);border-radius:0;color:var(--ink)}
+.field input:focus{outline:none;background:var(--blue-soft)}
+.row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.b{border:var(--rule);background:var(--paper);color:var(--ink);font:900 13px/1 var(--font);letter-spacing:.12em;text-transform:uppercase;padding:14px 18px;cursor:pointer}
+.b:hover{background:var(--ink);color:#fff}
+.b.fill{background:var(--ink);color:#fff}
+.b.fill:hover{background:var(--blue);color:var(--ink)}
+.b.sun{background:var(--sun)}
+pre.summary{white-space:pre-wrap;background:var(--blue-soft);border:var(--rule);padding:14px;font:15px/1.6 var(--font);margin:0 0 18px}
+.toast{position:fixed;left:50%;bottom:24px;translate:-50% 20px;opacity:0;background:var(--ink);color:#fff;padding:12px 20px;font-weight:700;font-size:15px;transition:.25s;z-index:60;pointer-events:none}
+.toast.show{opacity:1;translate:-50% 0}
+
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 96 80">
+    <g fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 14c-8-6-20-4-23 4-8 1-12 9-9 15-6 5-5 14 2 17-1 8 6 13 13 11 3 6 11 7 17 3"/>
+      <path d="M17 18c3 5 9 6 13 4M9 33c5 2 9 0 11-3M10 50c5-1 8-5 8-9M23 61c2-4 6-6 10-5"/>
+      <path d="M22 40h6l3-6 4 12 3-6h2"/>
+      <path d="M46 30v34"/>
+      <circle cx="46" cy="19" r="2.6" fill="currentColor" stroke="none"/>
+      <path d="M55 14v50h8"/>
+      <path d="M55 22c8-6 18-6 26-1v40c-8-5-18-5-26 1"/>
+      <path d="M81 21c3-1 5-1 7 0v40c-2-1-4-1-7 0"/>
+      <path d="M62 30c5-2 10-2 13 0M62 39c5-2 10-2 13 0M62 48c5-2 10-2 13 0"/>
+    </g>
+  </symbol>
+  <symbol id="i-brain" viewBox="0 0 56 56"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M28 10c-6-4-15-2-17 4-6 1-8 7-6 11-4 4-3 10 2 12-1 6 4 10 10 8 2 5 8 5 11 2 3 3 9 3 11-2 6 2 11-2 10-8 5-2 6-8 2-12 2-4 0-10-6-11-2-6-11-8-17-4zM28 10v37"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 56 56"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M4 28h10l5-12 7 26 6-20 5 10 3-4h12"/></symbol>
+  <symbol id="i-book" viewBox="0 0 56 56"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M28 16c-7-5-15-5-22-1v28c7-4 15-4 22 1 7-5 15-5 22-1V15c-7-4-15-4-22 1zM28 16v28"/></symbol>
+  <symbol id="i-il" viewBox="0 0 56 56"><circle cx="18" cy="13" r="2.6" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" d="M18 22v24M30 10v36h14"/></symbol>
+  <symbol id="i-board" viewBox="0 0 96 96"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square"><rect x="12" y="12" width="72" height="72"/><path d="M12 36h72M12 60h72M36 12v72M60 12v72"/></g><rect x="18" y="18" width="12" height="12" fill="currentColor"/><circle cx="72" cy="72" r="6" fill="currentColor"/></symbol>
+  <symbol id="i-box" viewBox="0 0 96 96"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="miter"><path d="M48 12l34 16v40L48 84 14 68V28z"/><path d="M14 28l34 16 34-16M48 44v40M31 20l34 16v12"/></g></symbol>
+  <symbol id="i-dice" viewBox="0 0 96 96"><rect x="16" y="16" width="64" height="64" fill="none" stroke="currentColor" stroke-width="4"/><g fill="currentColor"><circle cx="34" cy="34" r="6"/><circle cx="62" cy="34" r="6"/><circle cx="48" cy="48" r="6"/><circle cx="34" cy="62" r="6"/><circle cx="62" cy="62" r="6"/></g></symbol>
+  <symbol id="i-pages" viewBox="0 0 96 96"><g fill="none" stroke="currentColor" stroke-width="4"><path d="M48 24c-12-8-26-8-36-3v54c10-5 24-5 36 3 12-8 26-8 36-3V21c-10-5-24-5-36 3zM48 24v54"/><path d="M20 36h18M20 46h18M20 56h12M58 36h18M58 46h18"/></g></symbol>
+  <symbol id="i-play" viewBox="0 0 96 96"><rect x="12" y="20" width="72" height="56" fill="none" stroke="currentColor" stroke-width="4"/><path d="M40 36l20 12-20 12z" fill="currentColor"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 96 96"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="miter"><path d="M10 18h12l10 44h44l8-30H28"/></g><circle cx="38" cy="76" r="6" fill="currentColor"/><circle cx="70" cy="76" r="6" fill="currentColor"/></symbol>
+</svg>
+
+<header>
+  <div class="nav px">
+    <a class="brand" href="#home" aria-label="IntelLee หน้าแรก">
+      <span class="sq"><svg><use href="#mark"/></svg></span>
+      <b>IntelLee</b>
+    </a>
+    <ul class="menu" id="menu" aria-label="เมนูหลัก">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About us</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#content">Content</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+    <button type="button" class="donate" id="donateBtn">Donate us</button>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <div class="page" data-page="home">
+    <section class="hero">
+      <div class="txt px">
+        <h1>Smart<br>Learning<br><span>Fun<br>Playing.</span></h1>
+        <p class="sub">Publishing · Board Games · Tools</p>
+        <p class="th">IntelLee ทำหนังสือ บอร์ดเกม เครื่องมือ และคอนเทนต์ความรู้ ที่ทำให้การเรียนรู้สนุกขึ้น ทั้งของฟรีที่ใช้ได้ทันทีบนเว็บ และสินค้าที่สั่งซื้อได้</p>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 96 80"><use href="#mark"/></svg>
+        <a class="cta" href="#products">Explore Products</a>
+      </div>
+    </section>
+
+    <section class="sec px">
+      <div class="shead"><h2>Featured Works</h2><span>[ 01 ]</span></div>
+      <div class="sgrid" id="featured"></div>
+    </section>
+
+    <section class="sec px">
+      <div class="shead"><h2>About IntelLee</h2><span>[ 02 ]</span></div>
+      <div class="about">
+        <div>
+          <p class="big">เราเชื่อว่าการเรียนรู้ที่จริงจัง กับการเล่นที่สนุก ไปด้วยกันได้</p>
+          <div class="bar"></div>
+        </div>
+        <div class="quad">
+          <div><span class="n">01</span><svg><use href="#i-brain"/></svg><h3>Brain</h3><p>ปัญญา ความคิด งานทุกชิ้นต้องชวนให้คิด</p></div>
+          <div class="dk"><span class="n">02</span><svg><use href="#i-wave"/></svg><h3>Wave</h3><p>พลัง การเชื่อมต่อ เรียนรู้ไปพร้อมกับคนอื่น</p></div>
+          <div class="dk"><span class="n">03</span><svg><use href="#i-book"/></svg><h3>Book</h3><p>การเรียนรู้ ความรู้ที่นำไปใช้ได้จริง</p></div>
+          <div><span class="n">04</span><svg><use href="#i-il"/></svg><h3 style="text-transform:none">iL</h3><p>อักษรย่อที่ซ่อนอยู่ Intel + Lee</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" data-page="about" hidden>
+    <section class="phead">
+      <div class="txt px">
+        <span class="idx">[ 01 ] ABOUT US</span>
+        <h1>About<br>us</h1>
+        <p>IntelLee คือสตูดิโอเล็ก ๆ ที่ทำหนังสือ บอร์ดเกม เครื่องมือ และคอนเทนต์ความรู้ ภายใต้แนวคิด Smart Learning, Fun Playing.</p>
+      </div>
+      <div class="panel"><svg viewBox="0 0 56 56"><use href="#i-brain"/></svg></div>
+    </section>
+    <section class="sec px">
+      <div class="shead"><h2>Our Pillars</h2><span>[ Brain + Wave + Book + iL ]</span></div>
+      <div class="pillars">
+        <div><span class="n">01</span><svg><use href="#i-brain"/></svg><h3>Brain</h3><p>ปัญญา ความคิด งานทุกชิ้นต้องชวนให้คิด ไม่ใช่แค่กดผ่าน</p></div>
+        <div><span class="n">02</span><svg><use href="#i-wave"/></svg><h3>Wave</h3><p>พลัง การเชื่อมต่อ เล่นและเรียนรู้ไปพร้อมกับคนอื่น</p></div>
+        <div><span class="n">03</span><svg><use href="#i-book"/></svg><h3>Book</h3><p>การเรียนรู้ ความรู้ เนื้อหาที่ตรวจสอบได้และนำไปใช้ได้จริง</p></div>
+        <div><span class="n">04</span><svg><use href="#i-il"/></svg><h3 style="text-transform:none">iL</h3><p>อักษรย่อที่ซ่อนอยู่ Intel + Lee ความฉลาดในแบบของเรา</p></div>
+        <div class="eq"><span class="n">= </span><svg viewBox="0 0 96 80"><use href="#mark"/></svg><b>IntelLee</b></div>
+      </div>
+      <div class="swatches">
+        <div><b>Light Blue</b><span>Smart · Calm · Trustworthy</span></div>
+        <div><b>White</b><span>Clean · Simple</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CATEGORY PAGES (filled by script) -->
+  <div class="page" data-page="list" hidden>
+    <section class="phead">
+      <div class="txt px">
+        <span class="idx" id="lIdx"></span>
+        <h1 id="lTitle"></h1>
+        <p id="lDesc"></p>
+      </div>
+      <div class="panel"><svg viewBox="0 0 96 96" id="lIcon"><use href="#i-pages"/></svg></div>
+    </section>
+    <section class="sec px">
+      <div class="shead"><h2 id="lHead"></h2><span id="lCount"></span></div>
+      <div class="sgrid" id="lGrid"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="foot px">
+    <div>
+      <h3>IntelLee.</h3>
+      <p>Smart Learning, Fun Playing.</p>
+    </div>
+    <nav aria-label="ลิงก์ท้ายหน้า" id="footNav"></nav>
+  </div>
+  <div class="copy px">© 2026 IntelLee</div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ===== แก้ข้อมูลตรงนี้ ===== */
+const CONTACT = { line: "@intellee", email: "hello@intellee.com" };
+const DONATE = "พร้อมเพย์ 0X-XXXX-XXXX (ใส่เลขของคุณ)";
+/* type: publication | product | content    price: "free" | "฿890" | "tba" | "soon"    url: ลิงก์ผลงาน */
+const WORKS = [
+  { type:"product", label:"Board Game", icon:"i-board", title:"Guess The Legend", en:"Board Game", desc:"รายละเอียดเกมจะเปิดเผยเร็ว ๆ นี้", meta:[], price:"soon", url:"" },
+  { type:"product", label:"Board Game", icon:"i-dice", title:"Insider Camouflage", en:"Board Game", desc:"รายละเอียดเกมจะเปิดเผยเร็ว ๆ นี้", meta:[], price:"soon", url:"" },
+  { type:"product", label:"Board Game", icon:"i-pages", title:"The Legend Files", en:"Board Game", desc:"รายละเอียดเกมจะเปิดเผยเร็ว ๆ นี้", meta:[], price:"soon", url:"" }
+];
+/* ========================== */
+
+const PAGES = {
+  publications:{ idx:"[ 02 ] PUBLICATIONS", title:"Publi&shy;cations", head:"All Publications", icon:"i-pages", desc:"หนังสือ คู่มือ และงานเขียนจาก IntelLee", filter:w=>w.type==="publication" },
+  products:{ idx:"[ 03 ] PRODUCTS", title:"Products", head:"All Products", icon:"i-board", desc:"บอร์ดเกมที่เล่นได้ทันทีบนเว็บ บอร์ดเกมกล่อง และเครื่องมือที่เราทำขึ้น", filter:w=>w.type==="product" },
+  content:{ idx:"[ 04 ] CONTENT", title:"Content", head:"Latest Content", icon:"i-play", desc:"บทความ วิดีโอ และความรู้สั้น ๆ ที่อ่านและดูได้ฟรี", filter:w=>w.type==="content" },
+  shop:{ idx:"[ 05 ] SHOP", title:"Shop", head:"For Sale", icon:"i-cart", desc:"สินค้าที่สั่งซื้อได้ กดสั่งซื้อแล้วส่งรายการให้เราเพื่อยืนยันคำสั่งซื้อ", filter:w=>/^฿/.test(w.price) }
+};
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const priceText = p => p==="free" ? "ฟรี" : p==="tba" ? "ยังไม่มีราคา" : p==="soon" ? "Coming Soon" : p;
+const ctaText = w => /^฿/.test(w.price) ? "สั่งซื้อ" : w.type==="publication" ? "อ่าน" : w.type==="content" ? "ดู" : "เล่นเลย";
+
+function cell(w, i, dark){
+  const action = w.price==="soon"
+    ? `<span style="font-weight:900;font-size:14px;letter-spacing:.14em;text-transform:uppercase">Coming Soon</span>`
+    : w.price==="tba"
+    ? `<span style="font-weight:900;font-size:14px;letter-spacing:.14em;opacity:.6">ยังไม่เปิดขาย</span>`
+    : /^฿/.test(w.price)
+      ? `<button type="button" data-order="${esc(w.title)}" data-price="${w.price.replace(/[^0-9.]/g,"")}">${ctaText(w)}</button>`
+      : `<a href="${esc(w.url||"#")}" data-i="${i}">${ctaText(w)}</a>`;
+  return `<article class="cell${dark?" dark":""}">
+    <div class="top"><span class="label">${esc(w.label)}</span><span class="price">${esc(priceText(w.price))}</span></div>
+    <div class="glyph"><svg viewBox="0 0 96 96"><use href="#${w.icon}"/></svg></div>
+    <div><h3>${esc(w.title)}</h3><p class="en">${esc(w.en)}</p></div>
+    <p class="desc">${esc(w.desc)}</p>
+    ${w.meta.length?`<ul class="meta">${w.meta.map(m=>`<li>${esc(m)}</li>`).join("")}</ul>`:""}
+    <div class="act">${action}</div>
+  </article>`;
+}
+const emptyCell = `<div class="empty"><div><b>Coming soon</b><span>ยังไม่มีผลงานในหมวดนี้</span></div><a class="b" href="#home">กลับหน้าแรก</a></div>`;
+
+/* home: free items (max 3); if none yet, show upcoming items */
+const ALL = WORKS.map((w,i)=>[w,i]);
+let featured = ALL.filter(([w])=>w.price==="free").slice(0,3);
+if(!featured.length) featured = ALL.filter(([w])=>w.price==="soon").slice(0,3);
+$("#featured").innerHTML = featured.length ? featured.map(([w,i],k)=>cell(w,i,k===1)).join("") : emptyCell;
+
+/* footer nav mirrors the menu */
+$("#footNav").innerHTML = $("#menu").innerHTML.replace(/<\/?li>/g,"");
+
+/* router */
+function route(){
+  const key = (location.hash.slice(1) || "home");
+  const isList = key in PAGES;
+  const page = isList ? "list" : (key==="about" ? "about" : "home");
+  document.querySelectorAll(".page").forEach(p=>p.hidden = p.dataset.page!==page);
+  document.querySelectorAll("#menu a").forEach(a=>a.toggleAttribute("aria-current", a.getAttribute("href")==="#"+(page==="list"?key:page)));
+  if(isList){
+    const P = PAGES[key];
+    $("#lIdx").textContent = P.idx;
+    $("#lTitle").innerHTML = P.title;
+    $("#lDesc").textContent = P.desc;
+    $("#lHead").textContent = P.head;
+    $("#lIcon").innerHTML = `<use href="#${P.icon}"/>`;
+    const items = WORKS.map((w,i)=>[w,i]).filter(([w])=>P.filter(w));
+    $("#lCount").textContent = `[ ${String(items.length).padStart(2,"0")} ]`;
+    $("#lGrid").innerHTML = items.length ? items.map(([w,i],k)=>cell(w,i,k%2===1)).join("") : emptyCell;
+  }
+  document.title = page==="home" ? "IntelLee" : "IntelLee · " + (isList ? PAGES[key].head.replace(/^(All|Latest|For) /,"") : "About us");
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route);
+route();
+
+/* toast */
+let tt;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"),2400); }
+document.addEventListener("click", e=>{
+  const a = e.target.closest("a[data-i]"); if(!a) return;
+  const w = WORKS[a.dataset.i];
+  if(!w.url){ e.preventDefault(); toast(`${w.title} เปิดให้ใช้งานเร็ว ๆ นี้`); }
+});
+
+/* dialogs */
+const overlay=$("#overlay"), modal=$("#modal"); let lastFocus;
+function openModal(html){ lastFocus=document.activeElement; modal.innerHTML=html; overlay.classList.add("open"); }
+function closeModal(){ overlay.classList.remove("open"); lastFocus&&lastFocus.focus(); }
+overlay.addEventListener("click", e=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"&&overlay.classList.contains("open")) closeModal(); });
+async function copy(text){ try{ await navigator.clipboard.writeText(text); toast("คัดลอกแล้ว"); }catch{ toast("คัดลอกไม่ได้ ลองเลือกข้อความแล้วคัดลอกเอง"); } }
+
+function openOrder(item, price){
+  openModal(`<h3 id="mTitle">Order</h3><p>${esc(item)} · ฿${Number(price).toLocaleString("th-TH")}</p>
+    <form id="oForm">
+      <div class="field"><label for="oName">ชื่อผู้สั่ง</label><input id="oName" autocomplete="name"></div>
+      <div class="field"><label for="oContact">เบอร์โทรหรือ LINE ID</label><input id="oContact"></div>
+      <div class="field"><label for="oQty">จำนวน</label><input id="oQty" type="number" min="1" value="1" inputmode="numeric"></div>
+      <div class="row"><button type="button" class="b" id="oCancel">ยกเลิก</button><button class="b fill">สรุปรายการ</button></div>
+    </form>`);
+  $("#oName").focus();
+  $("#oCancel").onclick = closeModal;
+  $("#oForm").onsubmit = ev=>{
+    ev.preventDefault();
+    const name=$("#oName").value.trim(), c=$("#oContact").value.trim(), q=Math.max(1,parseInt($("#oQty").value)||1);
+    if(!name||!c){ toast("กรุณากรอกชื่อและช่องทางติดต่อ"); return; }
+    const text=`สั่งซื้อ: ${item}\nจำนวน: ${q}\nรวม: ฿${(q*price).toLocaleString("th-TH")}\nชื่อ: ${name}\nติดต่อ: ${c}`;
+    openModal(`<h3 id="mTitle">Summary</h3><p>คัดลอกรายการนี้ส่งมาที่ LINE ${esc(CONTACT.line)} หรือ ${esc(CONTACT.email)} แล้วเราจะยืนยันคำสั่งซื้อและแจ้งการชำระเงิน</p>
+      <pre class="summary">${esc(text)}</pre>
+      <div class="row"><button type="button" class="b" id="oClose">ปิด</button><button type="button" class="b fill" id="oCopy">คัดลอกรายการ</button></div>`);
+    $("#oClose").onclick=closeModal; $("#oCopy").onclick=()=>copy(text); $("#oCopy").focus();
+  };
+}
+document.addEventListener("click", e=>{ const b=e.target.closest("[data-order]"); if(b) openOrder(b.dataset.order, +b.dataset.price); });
+
+$("#donateBtn").addEventListener("click", ()=>{
+  openModal(`<h3 id="mTitle">Donate us</h3><p>ทุกการสนับสนุนช่วยให้เราทำหนังสือ บอร์ดเกม และเครื่องมือฟรีออกมาได้ต่อเนื่อง</p>
+    <pre class="summary">${esc(DONATE)}</pre>
+    <div class="row"><button type="button" class="b" id="dClose">ปิด</button><button type="button" class="b sun" id="dCopy">คัดลอกเลขบัญชี</button></div>`);
+  $("#dClose").onclick=closeModal; $("#dCopy").onclick=()=>copy(DONATE); $("#dCopy").focus();
+});
+</script>
+</body>
+</html>
